@@ -1,0 +1,4 @@
+SVC:
+  C: 100 
+  gamma: 'scale'
+  kernel: 'poly'

@@ -1,0 +1,43 @@
+# Virtual environment
+venv/
+ENV/
+env/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Logs and temp files
+*.log
+*.tmp
+*.swp
+
+# OS specific files
+.DS_Store
+Thumbs.db
+
+# Database files (agar local SQLite use kar rahe ho)
+*.sqlite3
+*.db
+
+# Model files (agar trained models local store karte ho)
+*.h5
+*.pkl
+*.joblib
+
+# Node modules (agar frontend ya JS use ho)
+node_modules/
+
+# Build / dist folders
+build/
+dist/
+*.egg-info/
+
+# IDE settings
+.vscode/
+.idea/

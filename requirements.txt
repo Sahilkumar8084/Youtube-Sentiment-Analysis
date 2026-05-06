@@ -1,0 +1,18 @@
+requests
+pandas
+python-box
+requests
+feedparser
+python-dotenv
+google-api-python-client
+nltk
+emoji
+seaborn
+matplotlib
+wordcloud
+scikit-learn
+sentence-transformers
+imbalanced-learn
+mlflow
+# mlflow-client  
+mlflow[scikit-learn] 
