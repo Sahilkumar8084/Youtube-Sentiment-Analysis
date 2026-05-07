@@ -1,3 +1,4 @@
+from Crypto.pipeline.model_evaluation_pipeline import ModelEvaluationPipeline
 from src.Crypto.pipeline.model_trainer_pipeline import ModelTrainerPipeline
 from src.Crypto.pipeline.data_transformation_pipeline import DataTransformationPipeline
 from src.Crypto.pipeline.eda_report_pipeline import EDAReportPipeline
@@ -110,6 +111,19 @@ if __name__ == "__main__":
         
         obj =ModelTrainerPipeline()
         obj.intantiate_model_trainer_pipeline() # .main() call karna mat bhulna jo humne pipeline mein banaya hai
+        
+        logger.info(f">>>>>> stage {STAGE_NAME} completed <<<<<<\n\nx==========x")
+    except Exception as e:
+        logger.exception(e)
+        raise e
+    
+    
+    try:
+        STAGE_NAME = "Model Evaluation stage" # Stage name define karna zaroori hai
+        logger.info(f">>>>>> stage {STAGE_NAME} started <<<<<<")
+        
+        obj =ModelEvaluationPipeline()
+        obj.intantiate_model_evaluation_pipeline() # .main() call karna mat bhulna jo humne pipeline mein banaya hai
         
         logger.info(f">>>>>> stage {STAGE_NAME} completed <<<<<<\n\nx==========x")
     except Exception as e:

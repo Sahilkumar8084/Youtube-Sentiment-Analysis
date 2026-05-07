@@ -1,7 +1,31 @@
 # Virtual environment
-venv/
+.venv/
 ENV/
+.env/
 env/
+.env
+
+venv/
+
+
+# artifacts\data_conversion\data.csv
+# artifacts\data_cleaning\data.csv
+# artifacts\data_ingestion\data.db
+# artifacts\data_report\data_report.txt
+# artifacts\data_transformation\test.csv
+# artifacts\data_transformation\train.csv
+# artifacts\data_transformation\embeddings.npy
+# artifacts\data_transformation\vectorizer.joblib
+
+artifacts/
+logs/
+.logs/
+research/
+.research/
+
+.research
+.research/
+
 
 # Python cache
 __pycache__/

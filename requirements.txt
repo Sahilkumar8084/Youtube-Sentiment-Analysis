@@ -16,3 +16,7 @@ imbalanced-learn
 mlflow
 # mlflow-client  
 mlflow[scikit-learn] 
+streamlit 
+plotly
+dvc 
+dvc-s3

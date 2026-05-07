@@ -53,3 +53,18 @@ class ModelTrainingConfig:
     p_c: int
     p_gamma: str
     p_kernel: str
+    
+
+@dataclass
+class ModelEvaluationConfig:
+    root_dir: Path
+    test_data_path: Path 
+    model_path: Path
+    vectorizer_path: Path
+    test_embedding: Path
+    evaluation_metrics_path : Path
+    curve_img: Path
+    mlflow_tracking_uri: str
+    mlflow_experiment_name: str
+    mlflow_registered_model_name :str
+    all_parmas: dict

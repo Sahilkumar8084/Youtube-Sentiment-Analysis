@@ -20,5 +20,18 @@ class DataCleaningPipeline:
             logger.error("Pipeline Error...❌")
             raise e
         
+if __name__ == "__main__":
+    
+    try:
+        STAGE_NAME = "Data Cleaning stage" # Stage name define karna zaroori hai
+        logger.info(f">>>>>> stage {STAGE_NAME} started <<<<<<")
         
+        obj = DataCleaningPipeline()
+        obj.intantiate_data_cleaning_pipeline() # .main() call karna mat bhulna jo humne pipeline mein banaya hai
+        
+        logger.info(f">>>>>> stage {STAGE_NAME} completed <<<<<<\n\nx==========x")
+    except Exception as e:
+        logger.exception(e)
+        raise e
+    
 

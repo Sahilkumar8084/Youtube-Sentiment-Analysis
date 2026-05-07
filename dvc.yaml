@@ -1,0 +1,91 @@
+stages:
+  data_ingestion:
+    cmd: set PYTHONPATH=.&& python src/Crypto/pipeline/data_ingestion_pipeline.py
+    deps:
+    - config/config.yaml
+    - src/Crypto/pipeline/data_ingestion_pipeline.py
+    outs:
+    - artifacts/data_ingestion/data.db
+
+  data_labelling:
+    cmd: set PYTHONPATH=.&& python src\Crypto\pipeline\data_labelling_pipeline.py
+    deps:
+      - config/config.yaml
+      - artifacts/data_ingestion/data.db
+    always_changed: true
+
+  data_conversion:
+    cmd: python src/Crypto/pipeline/data_conversioin_pipeline.py
+    deps:
+    - artifacts/data_ingestion/data.db
+    - src/Crypto/pipeline/data_conversioin_pipeline.py
+    outs:
+    - artifacts/data_conversion/data.csv
+
+  data_cleaning:
+    cmd: python src/Crypto/pipeline/data_cleaning_pipeline.py
+    deps:
+    - artifacts/data_conversion/data.csv
+    - src/Crypto/pipeline/data_cleaning_pipeline.py
+    outs:
+    - artifacts/data_cleaning/data.csv
+
+  reports:
+    cmd: python src/Crypto/pipeline/data_report_pipeline.py && python 
+      src/Crypto/pipeline/eda_report_pipeline.py
+    deps:
+    - artifacts/data_cleaning/data.csv
+    - src/Crypto/pipeline/data_report_pipeline.py
+    - src/Crypto/pipeline/eda_report_pipeline.py
+    outs:
+    - artifacts/data_report/data_report.txt
+    - artifacts/eda_report
+
+  data_transformation:
+    cmd: python src/Crypto/pipeline/data_transformation_pipeline.py
+    deps:
+    - artifacts/data_cleaning/data.csv
+    - src/Crypto/pipeline/data_transformation_pipeline.py
+    outs:
+    - artifacts/data_transformation/test.csv
+    - artifacts/data_transformation/train.csv
+    - artifacts/data_transformation/vectorizer.joblib
+
+  model_training:
+    cmd: python src/Crypto/pipeline/model_trainer_pipeline.py
+    deps:
+    - artifacts/data_transformation/test.csv
+    - artifacts/data_transformation/train.csv
+    - src/Crypto/pipeline/model_trainer_pipeline.py
+    - params.yaml
+    outs:
+    - artifacts/model_training/model.joblib
+
+  # model_evaluation:
+  #   cmd: python src/Crypto/pipeline/model_evaluation_pipeline.py
+  #   deps:
+  #   - artifacts/data_transformation/vectorizer.joblib
+  #   - artifacts/model_training/model.joblib
+  #   - src/Crypto/pipeline/model_evaluation_pipeline.py
+
+  #   always_changed: true
+  #   # - artifacts/model_evaluation/roc_auc_curve.jpg
+  #   metrics:
+  #   - artifacts/model_evaluation/metrics.json:
+  #       cache: false
+
+  model_evaluation:
+    cmd: python src/Crypto/pipeline/model_evaluation_pipeline.py
+    deps:
+      - src/Crypto/pipeline/model_evaluation_pipeline.py
+      - artifacts/data_transformation/test.csv
+      - artifacts/embeddings/test_embeddings.npy
+      - artifacts/model_training/model.joblib
+      - artifacts/data_transformation/vectorizer.joblib
+      - config/config.yaml
+    
+    always_changed: true
+    
+    # INDIVIDUAL FILES KI JAGAH POORA FOLDER DALO
+    outs:
+      - artifacts/model_evaluation  # Tera root_dir yahi hai na? Bas kaam khatam!

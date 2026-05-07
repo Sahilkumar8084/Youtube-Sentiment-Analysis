@@ -130,6 +130,29 @@ class ConfigurationManager:
         )
         logger.debug("Model Trainer is working compeletely fine...✅")
         return model_trainer
+    
+    def get_model_evaluation(self)->ModelEvaluationConfig:
+        config = self.config.model_evaluation
+        mlflow_config = self.config.mlflow
+        parmas = self.parmas.SVC
+        create_directories([config.root_dir])
+        
+        model_evaluation_config = ModelEvaluationConfig(
+            root_dir=config.root_dir,
+            test_data_path=config.test_data_path,
+            model_path=config.model_path,
+            test_embedding= config.test_embedding,
+            vectorizer_path = config.vectorizer_path,
+            mlflow_tracking_uri=mlflow_config.mlflow_tracking_uri,
+            mlflow_experiment_name=mlflow_config.mlflow_experiment_name,
+            mlflow_registered_model_name=mlflow_config.mlflow_registered_model_name,
+            evaluation_metrics_path=config.evaluation_metrics_path,
+            curve_img= config.curve_img,
+            all_parmas = parmas
+            # f1_score_threshold=config.f1_score_threshold
+        )
+        logger.debug("Model Evaluation is working compeletely fine...✅")
+        return model_evaluation_config
 
 
     
