@@ -7,6 +7,8 @@ env/
 
 venv/
 
+.env
+research/Research 02.ipynb
 
 # artifacts\data_conversion\data.csv
 # artifacts\data_cleaning\data.csv
