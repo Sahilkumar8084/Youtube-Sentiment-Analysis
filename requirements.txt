@@ -1,3 +1,8 @@
+streamlit>=1.30.0
+mlflow>=2.10.0
+protobuf==4.25.3
+#google-api-python-client
+
 requests
 pandas
 python-box
