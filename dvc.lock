@@ -1,0 +1,170 @@
+schema: '2.0'
+stages:
+  data_ingestion:
+    cmd: set PYTHONPATH=.&& python 
+      src/Crypto/pipeline/data_ingestion_pipeline.py
+    deps:
+    - path: config/config.yaml
+      hash: md5
+      md5: dd2c69787ed396cc1880b683156a66d7
+      size: 2126
+    - path: src/Crypto/pipeline/data_ingestion_pipeline.py
+      hash: md5
+      md5: faabfd79ba9ee1e9394e77d6a7243b02
+      size: 1403
+    outs:
+    - path: artifacts/data_ingestion/data.db
+      hash: md5
+      md5: 2e06d0e269b438116d8ecbb73f203fee
+      size: 290816
+  data_labelling:
+    cmd: set PYTHONPATH=.&& python 
+      src\Crypto\pipeline\data_labelling_pipeline.py
+    deps:
+    - path: artifacts/data_ingestion/data.db
+      hash: md5
+      md5: eb2281118781c5bbd735ea2e123ad90d
+      size: 339968
+    - path: config/config.yaml
+      hash: md5
+      md5: dd2c69787ed396cc1880b683156a66d7
+      size: 2126
+  data_conversion:
+    cmd: python src/Crypto/pipeline/data_conversioin_pipeline.py
+    deps:
+    - path: artifacts/data_ingestion/data.db
+      hash: md5
+      md5: eb2281118781c5bbd735ea2e123ad90d
+      size: 339968
+    - path: src/Crypto/pipeline/data_conversioin_pipeline.py
+      hash: md5
+      md5: 8299b4242ac11ae797a60decb2041dda
+      size: 1454
+    outs:
+    - path: artifacts/data_conversion/data.csv
+      hash: md5
+      md5: 1bebee12cd5655f9bbdb55e51766308c
+      size: 242537
+  data_cleaning:
+    cmd: python src/Crypto/pipeline/data_cleaning_pipeline.py
+    deps:
+    - path: artifacts/data_conversion/data.csv
+      hash: md5
+      md5: 1bebee12cd5655f9bbdb55e51766308c
+      size: 242537
+    - path: src/Crypto/pipeline/data_cleaning_pipeline.py
+      hash: md5
+      md5: 65ce02b622c276a98174b6d4df8816d8
+      size: 1301
+    outs:
+    - path: artifacts/data_cleaning/data.csv
+      hash: md5
+      md5: 3b2a9d67fc9868fc90dd48c3381c5223
+      size: 138199
+  reports:
+    cmd: python src/Crypto/pipeline/data_report_pipeline.py && python 
+      src/Crypto/pipeline/eda_report_pipeline.py
+    deps:
+    - path: artifacts/data_cleaning/data.csv
+      hash: md5
+      md5: 3b2a9d67fc9868fc90dd48c3381c5223
+      size: 138199
+    - path: src/Crypto/pipeline/data_report_pipeline.py
+      hash: md5
+      md5: 9ab132d037561f78fdcbaa3da32994be
+      size: 1570
+    - path: src/Crypto/pipeline/eda_report_pipeline.py
+      hash: md5
+      md5: af4415e1d81a10905ddfc845c523a2cc
+      size: 1354
+    outs:
+    - path: artifacts/data_report/data_report.txt
+      hash: md5
+      md5: 9fa8c4cc357e70eef75eb45a2f83b2d0
+      size: 1453
+    - path: artifacts/eda_report
+      hash: md5
+      md5: 6ddcecd56bd993ec8f777d26d5f92c6c.dir
+      size: 651626
+      nfiles: 6
+  data_transformation:
+    cmd: python src/Crypto/pipeline/data_transformation_pipeline.py
+    deps:
+    - path: artifacts/data_cleaning/data.csv
+      hash: md5
+      md5: 3b2a9d67fc9868fc90dd48c3381c5223
+      size: 138199
+    - path: src/Crypto/pipeline/data_transformation_pipeline.py
+      hash: md5
+      md5: 48de1be1986028c14583b95d67660b5a
+      size: 1688
+    outs:
+    - path: artifacts/data_transformation/test.csv
+      hash: md5
+      md5: 2cf541c27f816922abd1db15a5cb4f1c
+      size: 28409
+    - path: artifacts/data_transformation/train.csv
+      hash: md5
+      md5: a5e1370b4f26defcaae02b86b540ff25
+      size: 83007
+    - path: artifacts/data_transformation/vectorizer.joblib
+      hash: md5
+      md5: 98a9827dcb78f1d8d315e6552429a19f
+      size: 438912055
+  model_training:
+    cmd: python src/Crypto/pipeline/model_trainer_pipeline.py
+    deps:
+    - path: artifacts/data_transformation/test.csv
+      hash: md5
+      md5: 2cf541c27f816922abd1db15a5cb4f1c
+      size: 28409
+    - path: artifacts/data_transformation/train.csv
+      hash: md5
+      md5: a5e1370b4f26defcaae02b86b540ff25
+      size: 83007
+    - path: params.yaml
+      hash: md5
+      md5: 41496df7a6386ab1f0d79fef4853c6eb
+      size: 51
+    - path: src/Crypto/pipeline/model_trainer_pipeline.py
+      hash: md5
+      md5: f64db94fb5d4e6170f7493b6b639a169
+      size: 1533
+    outs:
+    - path: artifacts/model_training/model.joblib
+      hash: md5
+      md5: 503bb9addd2231ba14b1ec7636fa578f
+      size: 8335419
+  model_evaluation:
+    cmd: python src/Crypto/pipeline/model_evaluation_pipeline.py
+    deps:
+    - path: artifacts/data_transformation/test.csv
+      hash: md5
+      md5: 2cf541c27f816922abd1db15a5cb4f1c
+      size: 28409
+    - path: artifacts/data_transformation/vectorizer.joblib
+      hash: md5
+      md5: 98a9827dcb78f1d8d315e6552429a19f
+      size: 438912055
+    - path: artifacts/embeddings/test_embeddings.npy
+      hash: md5
+      md5: 40a6b9bbf43248748b82a632d498d4de
+      size: 1505408
+    - path: artifacts/model_training/model.joblib
+      hash: md5
+      md5: 503bb9addd2231ba14b1ec7636fa578f
+      size: 8335419
+    - path: config/config.yaml
+      hash: md5
+      md5: dd2c69787ed396cc1880b683156a66d7
+      size: 2126
+    - path: src/Crypto/pipeline/model_evaluation_pipeline.py
+      hash: md5
+      md5: 6b27dfdbda26ebe23a6364f4d044e3a1
+      size: 1480
+    outs:
+    - path: artifacts/model_evaluation
+      hash: md5
+      md5: 33388b6173652c3b3b102f67be20f9a1.dir
+      size: 45401
+      nfiles: 2
