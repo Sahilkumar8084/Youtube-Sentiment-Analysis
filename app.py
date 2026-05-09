@@ -237,9 +237,11 @@ def load_model():
         model = mlflow.sklearn.load_model("models:/sentiment_model/Production")
         return model, vector, "Production"
     except:
-        model_url =  "https://dagshub.com/sahilkumarrock8084/Youtube-Sentiment-Analysis/src/3cb7da03efad6e94c0bb92baf0745b90272027f2/artifacts/model_training/model.joblib"       
-        vector_url = "https://dagshub.com/sahilkumarrock8084/Youtube-Sentiment-Analysis/src/78e70e9533f34dc0a06fa05d5e16ab0c898546c7/artifacts/data_transformation/vectorizer.joblib"
-        
+        # model_url =  "https://dagshub.com/sahilkumarrock8084/Youtube-Sentiment-Analysis/src/3cb7da03efad6e94c0bb92baf0745b90272027f2/artifacts/model_training/model.joblib"       
+        # vector_url = "https://dagshub.com/sahilkumarrock8084/Youtube-Sentiment-Analysis/src/78e70e9533f34dc0a06fa05d5e16ab0c898546c7/artifacts/data_transformation/vectorizer.joblib"
+        model_url = "https://dagshub.com/sahilkumarrock8084/Youtube-Sentiment-Analysis/raw/main/artifacts/model_training/model.joblib"
+        vector_url = "https://dagshub.com/sahilkumarrock8084/Youtube-Sentiment-Analysis/raw/main/artifacts/data_transformation/vectorizer.joblib"
+
         vector = joblib.load(urllib.request.urlopen(vector_url))
 
         model = joblib.load(urllib.request.urlopen(model_url))
