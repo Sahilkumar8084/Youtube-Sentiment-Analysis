@@ -122,4 +122,4 @@ class ModelEvaluationComponent:
         except Exception as e:
             logger.error(f"Promotion error: {e}")
             return False
-                        
+        

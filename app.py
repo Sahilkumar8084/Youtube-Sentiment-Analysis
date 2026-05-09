@@ -229,7 +229,8 @@ def load_model():
     # Note: MLflow URI and paths remains same as your original
     try:
         mlflow.set_tracking_uri("https://dagshub.com/sahilkumarrock8084/Youtube-Sentiment-Analysis.mlflow")
-        vector = joblib.load(r"artifacts/data_transformation/vectorizer.joblib")
+        vector = joblib.load(r"https://dagshub.com/sahilkumarrock8084/Youtube-Sentiment-Analysis/src/78e70e9533f34dc0a06fa05d5e16ab0c898546c7/artifacts/data_transformation/vectorizer.joblib")
+        
         model = mlflow.sklearn.load_model("models:/sentiment_model/Production")
         return model, vector, "Production"
     except:
