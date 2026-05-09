@@ -19,7 +19,7 @@ research/Research 02.ipynb
 # artifacts\data_transformation\embeddings.npy
 # artifacts\data_transformation\vectorizer.joblib
 
-# artifacts/
+artifacts/
 logs/
 .logs/
 research/

@@ -15,8 +15,8 @@ stages:
     outs:
     - path: artifacts/data_ingestion/data.db
       hash: md5
-      md5: 2e06d0e269b438116d8ecbb73f203fee
-      size: 290816
+      md5: eb2281118781c5bbd735ea2e123ad90d
+      size: 339968
   data_labelling:
     cmd: set PYTHONPATH=.&& python 
       src\Crypto\pipeline\data_labelling_pipeline.py
