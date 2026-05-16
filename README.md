@@ -1,5 +1,6 @@
-
-
+---
+Full Documentation: https://deepwiki.com/Sahilkumar8084/Youtube-Sentiment-Analysis
+---
 # YouTube Sentiment Analysis
 
 An end-to-end MLOps pipeline for analyzing viewer sentiment from YouTube comments with real-time dashboard visualization.
