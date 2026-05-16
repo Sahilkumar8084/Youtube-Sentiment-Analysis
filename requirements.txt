@@ -1,7 +1,7 @@
-streamlit>=1.30.0
-mlflow>=2.10.0
-protobuf==4.25.3
-#google-api-python-client
+# streamlit>=1.30.0
+# mlflow>=2.10.0
+# protobuf==4.25.3
+# #google-api-python-client
 
 requests
 pandas
@@ -25,3 +25,10 @@ streamlit
 plotly
 dvc 
 dvc-s3
+
+
+airflow-operators
+apache-airflow
+
+apache-airflow-providers-slack
+apache-airflow-providers-http

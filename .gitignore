@@ -1,69 +1,69 @@
-# Virtual environment
-.venv/
-ENV/
-.env/
-env/
-.env
-
-venv/
-
-.env
-research/Research 02.ipynb
-
-# artifacts\data_conversion\data.csv
-# artifacts\data_cleaning\data.csv
-# artifacts\data_ingestion\data.db
-# artifacts\data_report\data_report.txt
-# artifacts\data_transformation\test.csv
-# artifacts\data_transformation\train.csv
-# artifacts\data_transformation\embeddings.npy
-# artifacts\data_transformation\vectorizer.joblib
-
-artifacts/
-logs/
-.logs/
-research/
-.research/
-
-.research
-.research/
-
-
-# Python cache
+# ==============================================================================
+# Python & Environment
+# ==============================================================================
 __pycache__/
-*.pyc
-*.pyo
-*.pyd
+*.py[cod]
+*$py.class
+*.egg-info/
+.eggs/
+build/
+dist/
+venv/
+.venv/
+env/
+.env/
+ENV/
+.env
+airflow/.env
 
-# Jupyter Notebook checkpoints
+# ==============================================================================
+# Jupyter Notebooks
+# ==============================================================================
 .ipynb_checkpoints/
 
-# Logs and temp files
+# ==============================================================================
+# Logs & Temp Files
+# ==============================================================================
 *.log
 *.tmp
 *.swp
+logs/
+.logs/
+*.pid
 
-# OS specific files
-.DS_Store
-Thumbs.db
+# ==============================================================================
+# Project Specific (Airflow, Artifacts, Research)
+# ==============================================================================
+artifacts/
+research/
+.research/
 
-# Database files (agar local SQLite use kar rahe ho)
+# Airflow specific
+airflow/logs/
+airflow/airflow-webserver.pid
+airflow/airflow.db
+airflow/stand-alone-processor.pid
+
+# Database & Models
 *.sqlite3
 *.db
-
-# Model files (agar trained models local store karte ho)
 *.h5
 *.pkl
 *.joblib
+*.npy
 
-# Node modules (agar frontend ya JS use ho)
-node_modules/
+# ==============================================================================
+# DVC (Data Version Control)
+# ==============================================================================
+/dvc_plots/
+.dvc/config.local
+.dvc/tmp/
+.dvc/cache/
 
-# Build / dist folders
-build/
-dist/
-*.egg-info/
-
-# IDE settings
+# ==============================================================================
+# OS & IDE
+# ==============================================================================
+.DS_Store
+Thumbs.db
 .vscode/
 .idea/
